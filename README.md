@@ -35,6 +35,7 @@ src/test/java/com/homerun/
   TestcontainersConfiguration.java  테스트용 PostgreSQL 컨테이너
 compose.yaml                        로컬 개발용 의존 서비스 (앱 없음)
 compose.prod.yaml                   앱까지 묶어서 띄울 때
+skills-lock.json                    에이전트 스킬 버전 고정 (본체는 커밋 안 함)
 ```
 
 ## 자주 쓰는 명령
@@ -46,6 +47,7 @@ compose.prod.yaml                   앱까지 묶어서 띄울 때
 | `./gradlew spotlessApply` | 포맷 검사에 걸렸을 때 고치는 명령 |
 | `npm run commit` | 커밋 타입을 골라서 컨벤션에 맞는 메시지로 커밋 |
 | `docker compose -f compose.prod.yaml up -d --build` | 앱까지 컨테이너로 띄우기 |
+| `npx skills experimental_install` | 에이전트 스킬 복원 (`.agents/skills/`). Claude Code 는 [SETUP.md](SETUP.md#3-에이전트-스킬-설치-선택) 참고 |
 
 ## 규칙
 

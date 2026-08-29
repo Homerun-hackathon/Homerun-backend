@@ -40,7 +40,38 @@ npm install
 | commit-msg | commitlint — 커밋 메시지 형식 검사 | 즉시 |
 | pre-push | `./gradlew build` — 컴파일 + 포맷 + 테스트 | 수십 초 |
 
-## 3. 빌드와 실행
+## 3. 에이전트 스킬 설치 (선택)
+
+이 저장소는 AI 코딩 에이전트용 스킬 두 벌을 함께 씁니다. 안 깔아도 개발에는 지장이 없습니다.
+
+| 스킬 | 하는 일 |
+|---|---|
+| `archify` | 코드베이스나 설명을 받아 아키텍처·시퀀스·데이터플로우 다이어그램을 단독 HTML로 만든다 |
+| `ponytail` 외 5종 | 에이전트가 과하게 짜지 않게 누른다. 리뷰/감사/부채 추적 명령도 같이 온다 |
+
+버전은 `skills-lock.json` 에 해시로 고정돼 있습니다. 스킬 본체(약 6.7MB)는 커밋하지 않습니다.
+
+**Claude Code 를 쓴다면:**
+
+```bash
+npx skills add tt-a1i/archify --agent claude-code --skill '*' --yes
+npx skills add DietrichGebert/ponytail --agent claude-code --skill '*' --yes
+```
+
+`.claude/skills/` 에 설치됩니다. `--agent` 를 `cursor`, `codex`, `opencode` 로 바꾸면 해당 에이전트에 깔립니다.
+
+**`.agents/skills/` 를 읽는 에이전트라면** lock 파일에서 한 번에 복원할 수 있습니다:
+
+```bash
+npx skills experimental_install
+```
+
+이 명령은 `.agents/skills/` 에만 풉니다. **Claude Code 는 그 경로를 읽지 않으니** Claude Code 사용자는 위의 `--agent claude-code` 쪽을 쓰세요.
+
+> 스킬은 에이전트 권한으로 그대로 실행됩니다. 서드파티 코드를 받는 것이므로,
+> 올릴 때마다 `skills-lock.json` 의 해시 변화가 PR 에 드러나게 해 두었습니다.
+
+## 4. 빌드와 실행
 
 ```bash
 ./gradlew build     # 전부 통과하는지 먼저 확인
@@ -58,7 +89,7 @@ curl http://localhost:8080/actuator/health
 open http://localhost:8080/swagger-ui.html
 ```
 
-## 4. 앱까지 컨테이너로 띄우기
+## 5. 앱까지 컨테이너로 띄우기
 
 ```bash
 docker compose -f compose.prod.yaml up -d --build
