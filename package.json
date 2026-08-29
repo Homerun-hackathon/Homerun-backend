@@ -1,0 +1,14 @@
+{
+  "name": "homerun-backend-tools",
+  "private": true,
+  "scripts": {
+    "prepare": "husky",
+    "test": "./gradlew test",
+    "commit": "node scripts/commit.js"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
+    "husky": "^9.1.7"
+  }
+}
